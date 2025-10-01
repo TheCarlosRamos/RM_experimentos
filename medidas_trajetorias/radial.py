@@ -55,7 +55,7 @@ def plot_radial_trajectories(image, valores_dft, coordenadas):
     
     axes[2].imshow(np.log10(np.abs(k_space_shifted) + 1), cmap='gray')
     
-    n_radial_lines = 13
+    n_radial_lines = 10
     points_per_line = len(coordenadas) // n_radial_lines
     
     for i in range(min(16, n_radial_lines)):
@@ -63,8 +63,8 @@ def plot_radial_trajectories(image, valores_dft, coordenadas):
         end_idx = start_idx + points_per_line
         if end_idx <= len(coordenadas):
             coords_slice = coordenadas[start_idx:end_idx]
-            axes[2].plot(coords_slice[:, 1] * M//2 + M//2, 
-                        coords_slice[:, 0] * N//2 + N//2, 
+            axes[2].plot(coords_slice[:, 1] + M//2, 
+                        coords_slice[:, 0] + N//2, 
                         'r-', alpha=0.5, linewidth=0.8)
     
     axes[2].set_title(f'Trajetória Radial ({n_radial_lines} linhas)')

@@ -56,8 +56,8 @@ def plot_spiral_trajectories(image, valores_dft, coordenadas):
     
     axes[2].imshow(np.log10(np.abs(k_space_shifted) + 1), cmap='gray')
     
-    axes[2].plot(coordenadas[:, 1] * M//2 + M//2, 
-                coordenadas[:, 0] * N//2 + N//2, 
+    axes[2].plot(coordenadas[:, 1] + M//2, 
+                coordenadas[:, 0] + N//2, 
                 'b-', alpha=0.8, linewidth=1.5)
     
     axes[2].set_title('Trajetória Espiral')
