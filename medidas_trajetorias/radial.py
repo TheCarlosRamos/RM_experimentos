@@ -62,7 +62,7 @@ def plot_radial_trajectories(image, valores_dft, coordenadas):
             axes[2].plot(coords_slice[:, 1] + M // 2,
                          coords_slice[:, 0] + N // 2,
                          'r-', alpha=0.8, linewidth=1.0)
-    axes[2].set_title(f'Trajetória Radial ({n_radial_lines} linhas)')
+    axes[2].set_title(f'Trajetória Radial')
     axes[2].axis('off')
     plt.tight_layout()
     plt.show()
@@ -72,9 +72,19 @@ if __name__ == '__main__':
         x = plt.imread('exemplo_corte_axial.jpg')
         if len(x.shape) == 3:
             x = x[:, :, 0]
+        print(f"Imagem carregada: {x.shape}")
     except FileNotFoundError:
+        print("Arquivo não encontrado. Criando imagem de exemplo...")
         x = np.random.randn(512, 512)
         x = np.abs(np.fft.ifft2(np.fft.fft2(x) * np.exp(-0.001*(np.arange(512)[:, None]**2 + np.arange(512)[None, :]**2)))).real
-    n_radial_lines = 14
+        print(f"Imagem exemplo criada: {x.shape}")
+    
+    n_radial_lines = 23
     valores_dft, coordenadas = extract_radial_trajectories(x, n_radial_lines)
+    
+    print(f"Numero de linhas radiais: {n_radial_lines}")
+    print(f"Valores DFT shape: {valores_dft.shape}")
+    print(f"Coordenadas shape: {coordenadas.shape}")
+    print(f"Total de pontos amostrados: {len(valores_dft)}")
+    
     plot_radial_trajectories(x, valores_dft, coordenadas)
